@@ -33,4 +33,25 @@ namespace kinematics {
         void precompute(double eb_strain);
     };
 
+    class kinematics3D
+    {
+    public:
+        double det;
+        double I_1;
+        double I_1m3;
+        double C[9];
+        double Cinv[9];
+        kinematics3D();
+        ~kinematics3D();
+    };
+
+
+    class deformation3D: public kinematics3D
+    {
+    public:
+        deformation3D();
+        deformation3D(const double vC[9]);
+        void precompute(const double vC[9]);
+    };
+
 }

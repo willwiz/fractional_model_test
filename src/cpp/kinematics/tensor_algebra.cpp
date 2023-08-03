@@ -11,9 +11,10 @@ namespace constitutive_models {
 
   const double id2d[4] = {1,0,0,1};
 
-  double ddot( const double a[4], const double b[4]) {
+  template<int dim>
+  inline double ddot(const double a[dim], const double b[dim]) {
     double val = 0;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < dim; i++)
     {
       val = val + a[i]*b[i];
     }

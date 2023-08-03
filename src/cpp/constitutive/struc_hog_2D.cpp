@@ -78,8 +78,8 @@ namespace constitutive_models {
     double det = Cmax[0]*Cmax[3] - Cmax[1]*Cmax[1];
     double I_n = 1.0 / det;
     double I_1 = Cmax[0] + Cmax[3] + I_n;
-    double I_4 = ddot(m4, Cmax);
-    double I_6 = ddot(m6, Cmax);
+    double I_4 = ddot<4>(m4, Cmax);
+    double I_6 = ddot<4>(m6, Cmax);
     double E6  = A * I_1 + C * I_n - 1.0;
     double E4  = E6 + B*I_4;
     E6  = E6 + B*I_6;
@@ -97,8 +97,8 @@ namespace constitutive_models {
   // Stress functions
   double StrucHOG2D::stress(const kinematics::kinematics2D &kin, double stress[4]){
 
-    double I_4 = ddot(m4, kin.C);
-    double I_6 = ddot(m6, kin.C);
+    double I_4 = ddot<4>(m4, kin.C);
+    double I_6 = ddot<4>(m6, kin.C);
     double E6  = A * kin.I_1 + C * kin.I_n - 1.0;
     double E4  = E6 + B*I_4;
     E6  = E6 + B*I_6;

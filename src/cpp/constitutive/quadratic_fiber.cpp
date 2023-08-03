@@ -34,8 +34,8 @@ namespace constitutive_models
 
   double QuadraticFiber::stress(const kinematics::kinematics2D &kin, double stress[4])
   {
-    double I_4 = ddot(m4, kin.C) - 1;
-    double I_6 = ddot(m6, kin.C) - 1;
+    double I_4 = ddot<4>(m4, kin.C) - 1;
+    double I_6 = ddot<4>(m6, kin.C) - 1;
     double dWd4 = k*I_4*I_4;
     double dWd6 = k*I_6*I_6;
     for (int i = 0; i < 4; i++)

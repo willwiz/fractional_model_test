@@ -21,7 +21,5 @@ End of Source Files
 # ------------------------------------------------------------------------------
 
 cdef extern from "cpp/kinematics/tensor_algebra.hpp" namespace "constitutive_models":
-  cdef double ddot(double[] a, double[] b)
-
   cdef void addto(double[] a, double[] b, int dim)
 

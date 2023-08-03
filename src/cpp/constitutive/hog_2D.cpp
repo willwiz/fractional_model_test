@@ -49,7 +49,7 @@ namespace constitutive_models {
   // Scaled version
   void Hog2D::set_pars(double k1, double k2, double theta, double Cmax[]) {
     this-> set_pars(k1, k2, theta);
-    E1 = ddot(m, Cmax) - 1;
+    E1 = ddot<4>(m, Cmax) - 1;
     this-> k1 = k1 / E1;
     this-> E2 = E1*E1;
   }
@@ -62,7 +62,7 @@ namespace constitutive_models {
   // Stress functions
   double Hog2D::stress(const kinematics::kinematics2D &kin, double stress[4]){
 
-    double I_4 = ddot(m, kin.C) - 1;
+    double I_4 = ddot<4>(m, kin.C) - 1;
     double dWd4 = k1*I_4*exp(k2* (I_4 * I_4 - E2));
 
     for (int i = 0; i < 4; i++)

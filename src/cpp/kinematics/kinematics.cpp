@@ -24,8 +24,6 @@ namespace kinematics {
     this -> precompute(args);
   }
 
-
-
   void deformation2D::precompute(const double args[4]) {
 
     this -> det = args[0]*args[3] - args[1]*args[2];
@@ -55,7 +53,6 @@ namespace kinematics {
 
   void deformation_ensemble2D::precompute(double eb_strain) {
 
-
     this -> det = eb_strain*eb_strain;
     this -> I_n = 1 / det;
     this -> C[0] =  eb_strain;
@@ -76,4 +73,43 @@ namespace kinematics {
     this -> I_1m3 = I_1 - 3.0;
   }
 
+
+  kinematics3D::kinematics3D(): C{}, Cinv{} {}
+  kinematics3D::~kinematics3D() {}
+
+  deformation3D::deformation3D() {}
+  deformation3D::deformation3D(const double args[9])
+    : kinematics3D()
+  {
+    this -> precompute(args);
+  }
+
+  double determinant_3D_tensor(const double tensor[9]) {
+    return -tensor[2]*tensor[2]* tensor[4] + 2*tensor[1]*tensor[2]*tensor[5]
+      - tensor[0]*tensor[5]*tensor[5] - tensor[1] * tensor[1] * tensor[8]
+      + tensor[0] * tensor[4] * tensor[8];
+  }
+
+  void deformation3D::precompute(const double args[9]) {
+
+    det = determinant_3D_tensor(args);
+    double I_n = 1 / det;
+    Cinv[0] = I_n * (-args[5]*args[5] + args[4]*args[8]);
+    Cinv[1] = I_n * ( args[2]*args[5] - args[1]*args[8]);
+    Cinv[2] = I_n * (-args[2]*args[4] + args[1]*args[5]);
+    Cinv[3] = Cinv[1];
+    Cinv[4] = I_n * (-args[2]*args[2] + args[0]*args[8]);
+    Cinv[5] = I_n * ( args[1]*args[2] - args[0]*args[5]);
+    Cinv[6] = Cinv[2];
+    Cinv[7] = Cinv[5];
+    Cinv[8] = I_n * (-args[1]*args[1] + args[0]*args[4]);
+
+    for (int i = 0; i < 9; i++)
+    {
+      C[i] = args[i];
+    }
+
+    I_1 = args[0] + args[4] + args[8];
+    I_1m3 = I_1 - 3.0;
+  }
 }
