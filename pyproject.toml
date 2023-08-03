@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm", "Cython",  "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "artery"
+version = "0.0.0"
+description = "A fractional viscoelastic model for femoral-popliteal arteries"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "License"}
+keywords = ["constitutive model", "viscoelasticity", "tissue", "biomechanics", "c++", "cython", "python"]
+authors = [
+  {name = "Will Zhang", email = "willwz@umich.edu"}
+]
+maintainers = [
+  {name = "Will Zhang", email = "willwz@umich.edu"}
+]
+classifiers = [
+  "Development Status :: 0 - Alpha",
+  "Programming Language :: Python",
+]
+dependencies = [
+  "Cython",
+  "matplotlib",
+  "numpy",
+  "scipy",
+  "opt_einsum",
+]
+
+[project.urls]
+homepage = "https://example.com"
+documentation = "https://readthedocs.org"
+repository = "https://github.com"
+changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"

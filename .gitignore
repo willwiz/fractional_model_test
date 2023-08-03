@@ -1,0 +1,14 @@
+.vscode
+.venv
+
+**/__pycache__
+**~$*
+**.mp4
+**.png
+**.tif
+**.pyd
+**.so
+**/__init__.pyc
+
+**/build/*
+**.egg-info/
