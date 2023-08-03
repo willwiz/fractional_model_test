@@ -12,7 +12,23 @@ Fractional viscoelastic modeling
 
 ## Pages
 > * [Home](README.md)
+# About
+Python module for fractional models implemented in C++.
+# Requirement
+Python > 3.10
 
-# About / Synopsis
+# Installation
+Create a Python environment first
+```
+python -m venv .venv
+```
+Install package via
+```
+pip install .
+```
+# Unit test
+run the unit tests with
+```
+python -m unittest discover ./unittests
+```
 
-TBD
