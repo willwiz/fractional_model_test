@@ -22,7 +22,7 @@ namespace constitutive_models {
     this -> mu = mu;
   }
 
-  double NeoHookean::stress(const kinematics::kinematics2D &kin, double stress[]){
+  double NeoHookean::stress(const kinematics::kinematics<4> &kin, double stress[]){
 
     for (int i = 0; i < 4; i++)
     {
@@ -37,7 +37,7 @@ namespace constitutive_models {
     double p = this->stress(kin, stress);
     for (int i = 0; i < 4; i++)
     {
-      stress[i] = stress[i] - p*kin.C33Cinv[i];
+      stress[i] = stress[i] - p*kin.I_n*kin.Cinv[i];
     }
   }
 

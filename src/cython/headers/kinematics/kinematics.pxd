@@ -28,7 +28,6 @@ cdef extern from "cpp/kinematics/kinematics.hpp" namespace "kinematics":
     double I_1m3
     double C[4]
     double Cinv[4]
-    double C33Cinv[4]
     kinematics2D() except +
 
   cdef cppclass deformation2D:

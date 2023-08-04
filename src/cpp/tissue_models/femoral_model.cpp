@@ -50,7 +50,7 @@ namespace sim {
     }
 
 
-    void Femoral::stress(const kinematics::kinematics2D &kin, const double dt, double stress[])
+    void Femoral::stress(const kinematics::kinematics<4> &kin, const double dt, double stress[])
     {
         double p = 0.0;
         double iso[4], el[4], smc[4], col[4];
@@ -60,7 +60,7 @@ namespace sim {
         p = p + m_collagen.stress(kin, col);
         for (int j = 0; j < 4; j++)
         {
-            stress[j] = iso[j] + col[j] + el[j] + smc[j] - p * kin.C33Cinv[j];
+            stress[j] = iso[j] + col[j] + el[j] + smc[j] - p * kin.I_n*kin.Cinv[j];
         }
     }
 
@@ -82,7 +82,7 @@ namespace sim {
     FemoralVE::~FemoralVE() {}
 
 
-    void FemoralVE::stress(const kinematics::kinematics2D &kin, const double dt, double stress[])
+    void FemoralVE::stress(const kinematics::kinematics<4> &kin, const double dt, double stress[])
     {
         double p = 0.0;
         double iso[4], el[4], smc[4], col[4];
@@ -92,7 +92,7 @@ namespace sim {
         p = p + collagen.stress(kin, dt, col);
         for (int j = 0; j < 4; j++)
         {
-            stress[j] = iso[j] + col[j] + el[j] + smc[j] - p * kin.C33Cinv[j];
+            stress[j] = iso[j] + col[j] + el[j] + smc[j] - p * kin.I_n*kin.Cinv[j];
         }
     }
 }

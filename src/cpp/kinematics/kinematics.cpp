@@ -14,12 +14,16 @@ namespace kinematics {
  |  Author: Will Zhang
  |  Dependencies: None
  -----------------------------------------------------------------------*/
-  kinematics2D::kinematics2D():  C{}, Cinv{}, C33Cinv{} {}
-  kinematics2D::~kinematics2D() {}
+
+  template<int dim>
+  kinematics<dim>::kinematics():  C{}, Cinv{} {}
+
+  template<int dim>
+  kinematics<dim>::~kinematics() {}
 
   deformation2D::deformation2D() {}
   deformation2D::deformation2D(const double args[4])
-    : kinematics2D()
+    : kinematics<4>()
   {
     this -> precompute(args);
   }
@@ -36,7 +40,6 @@ namespace kinematics {
     for (int i = 0; i < 4; i++)
     {
       this -> C[i] = args[i];
-      this -> C33Cinv[i] = I_n*Cinv[i];
     }
 
     this -> I_1 = args[0] + args[3] + I_n;
@@ -45,7 +48,7 @@ namespace kinematics {
 
   deformation_ensemble2D::deformation_ensemble2D() {}
   deformation_ensemble2D::deformation_ensemble2D(double eb_strain)
-    : kinematics2D()
+    : kinematics<4>()
   {
     this -> precompute(eb_strain);
   }
@@ -64,22 +67,20 @@ namespace kinematics {
     this -> Cinv[2] =  0;
     this -> Cinv[3] =  1.0 / eb_strain;
 
-    for (int i = 0; i < 4; i++)
-    {
-      this -> C33Cinv[i] = I_n*Cinv[i];
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //   this -> C33Cinv[i] = I_n*Cinv[i];
+    // }
 
     this -> I_1 = eb_strain + eb_strain + I_n;
     this -> I_1m3 = I_1 - 3.0;
   }
 
 
-  kinematics3D::kinematics3D(): C{}, Cinv{} {}
-  kinematics3D::~kinematics3D() {}
 
   deformation3D::deformation3D() {}
   deformation3D::deformation3D(const double args[9])
-    : kinematics3D()
+    : kinematics<9>()
   {
     this -> precompute(args);
   }
@@ -93,7 +94,7 @@ namespace kinematics {
   void deformation3D::precompute(const double args[9]) {
 
     det = determinant_3D_tensor(args);
-    double I_n = 1 / det;
+    I_n = 1 / det;
     Cinv[0] = I_n * (-args[5]*args[5] + args[4]*args[8]);
     Cinv[1] = I_n * ( args[2]*args[5] - args[1]*args[8]);
     Cinv[2] = I_n * (-args[2]*args[4] + args[1]*args[5]);

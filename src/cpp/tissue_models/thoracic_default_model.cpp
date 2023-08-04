@@ -33,7 +33,7 @@ namespace sim {
     }
 
 
-    void ThoracicDefaultBase::stress(const kinematics::kinematics2D &kin, const double dt, double stress[])
+    void ThoracicDefaultBase::stress(const kinematics::kinematics<4> &kin, const double dt, double stress[])
     {
         double p = 0.0;
         double mat[4], el[4], smc[4], col[4];
@@ -43,12 +43,12 @@ namespace sim {
         p = p + m_collagen.stress(kin, col);
         for (int j = 0; j < 4; j++)
         {
-            stress[j] = mat[j] + el[j] + smc[j] + col[j] - p * kin.C33Cinv[j];
+            stress[j] = mat[j] + el[j] + smc[j] + col[j] - p * kin.I_n*kin.Cinv[j];
         }
     }
 
 
-    void ThoracicDefaultVEBase::stress(const kinematics::kinematics2D &kin, const double dt, double stress[])
+    void ThoracicDefaultVEBase::stress(const kinematics::kinematics<4> &kin, const double dt, double stress[])
     {
         double p = 0.0;
         double mat[4], el[4], smc[4], col[4];
@@ -58,7 +58,7 @@ namespace sim {
         p = p + collagen.stress(kin, dt, col);
         for (int j = 0; j < 4; j++)
         {
-            stress[j] = mat[j] + el[j] + smc[j] + col[j] - p * kin.C33Cinv[j];
+            stress[j] = mat[j] + el[j] + smc[j] + col[j] - p * kin.I_n*kin.Cinv[j];
         }
     }
 

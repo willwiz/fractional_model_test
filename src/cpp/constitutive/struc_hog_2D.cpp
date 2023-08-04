@@ -95,7 +95,7 @@ namespace constitutive_models {
   }
 
   // Stress functions
-  double StrucHOG2D::stress(const kinematics::kinematics2D &kin, double stress[4]){
+  double StrucHOG2D::stress(const kinematics::kinematics<4> &kin, double stress[4]){
 
     double I_4 = ddot<4>(m4, kin.C);
     double I_6 = ddot<4>(m6, kin.C);
@@ -118,7 +118,7 @@ namespace constitutive_models {
     double p = this->stress(kin, stress);
     for (int i = 0; i < 4; i++)
     {
-      stress[i] = stress[i] - p*kin.C33Cinv[i];
+      stress[i] = stress[i] - p*kin.I_n*kin.Cinv[i];
     }
   }
 

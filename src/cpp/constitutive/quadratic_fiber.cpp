@@ -32,7 +32,7 @@ namespace constitutive_models
     this -> m6[3] = sa6*sa6;
   }
 
-  double QuadraticFiber::stress(const kinematics::kinematics2D &kin, double stress[4])
+  double QuadraticFiber::stress(const kinematics::kinematics<4> &kin, double stress[4])
   {
     double I_4 = ddot<4>(m4, kin.C) - 1;
     double I_6 = ddot<4>(m6, kin.C) - 1;

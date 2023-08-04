@@ -32,7 +32,7 @@ namespace sim {
     }
 
 
-    void PlanarElastinMatrix::stress(const kinematics::kinematics2D &kin, const double dt, double stress[])
+    void PlanarElastinMatrix::stress(const kinematics::kinematics<4> &kin, const double dt, double stress[])
     {
         double p = 0.0;
         double mat[4], el[4];
@@ -40,7 +40,7 @@ namespace sim {
         (void) m_elastin.stress(kin, el);
         for (int j = 0; j < 4; j++)
         {
-            stress[j] = mat[j] + el[j] - p * kin.C33Cinv[j];
+            stress[j] = mat[j] + el[j] - p * kin.I_n*kin.Cinv[j];
         }
     }
 

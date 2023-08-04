@@ -14,7 +14,7 @@
 
 namespace sim {
 
-  class ThoracicDefaultBase: public constitutive_models::MatLawTimeInterface
+  class ThoracicDefaultBase: public constitutive_models::MatLawTimeInterface<4>
   {
   protected:
     constitutive_models::NeoHookean m_matrix;
@@ -41,7 +41,7 @@ namespace sim {
 
     void get_scaled_pars(double pars[]);
 
-    void stress(const kinematics::kinematics2D &kin, const double dt, double stress[]);
+    void stress(const kinematics::kinematics<4> &kin, const double dt, double stress[]);
 
   };
 
@@ -67,7 +67,7 @@ namespace sim {
 
     ~ThoracicDefaultVEBase() {}
 
-    void stress(const kinematics::kinematics2D &kin, const double dt, double stress[]);
+    void stress(const kinematics::kinematics<4> &kin, const double dt, double stress[]);
 
   };
 

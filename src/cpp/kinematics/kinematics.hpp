@@ -2,21 +2,22 @@
 
 namespace kinematics {
 
-    class kinematics2D
+    template<int dim>
+    class kinematics
     {
     public:
         double det;
+        double C[dim];
+        double Cinv[dim];
         double I_n;
         double I_1;
         double I_1m3;
-        double C[4];
-        double Cinv[4];
-        double C33Cinv[4];
-        kinematics2D();
-        ~kinematics2D();
+        kinematics();
+        ~kinematics();
     };
 
-    class deformation2D: public kinematics2D
+
+    class deformation2D: public kinematics<4>
     {
     public:
         deformation2D();
@@ -25,7 +26,7 @@ namespace kinematics {
     };
 
 
-    class deformation_ensemble2D: public kinematics2D
+    class deformation_ensemble2D: public kinematics<4>
     {
     public:
         deformation_ensemble2D();
@@ -33,20 +34,9 @@ namespace kinematics {
         void precompute(double eb_strain);
     };
 
-    class kinematics3D
-    {
-    public:
-        double det;
-        double I_1;
-        double I_1m3;
-        double C[9];
-        double Cinv[9];
-        kinematics3D();
-        ~kinematics3D();
-    };
 
 
-    class deformation3D: public kinematics3D
+    class deformation3D: public kinematics<9>
     {
     public:
         deformation3D();

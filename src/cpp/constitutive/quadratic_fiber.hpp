@@ -5,7 +5,7 @@
 
 namespace constitutive_models
 {
-  class QuadraticFiber: public MatLawInterface
+  class QuadraticFiber: public MatLawInterface<4>
   {
 
   public:
@@ -17,7 +17,7 @@ namespace constitutive_models
     QuadraticFiber(double mu, double theta, double alpha, double beta);
 
     void set_pars(double mu, double theta, double alpha, double beta);
-    double stress(const kinematics::kinematics2D &kin, double stress[4]);
+    double stress(const kinematics::kinematics<4> &kin, double stress[4]);
     void stress(double args[4], double stress[4]);
   };
 

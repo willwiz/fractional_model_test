@@ -14,7 +14,7 @@
 
 namespace sim {
 
-  class Femoral: public constitutive_models::MatLawTimeInterface
+  class Femoral: public constitutive_models::MatLawTimeInterface<4>
   {
   protected:
     constitutive_models::NeoHookean m_matrix;
@@ -28,7 +28,7 @@ namespace sim {
     ~Femoral();
 
     void get_scaled_pars(double pars[]);
-    virtual void stress(const kinematics::kinematics2D &kin, const double dt, double stress[]);
+    virtual void stress(const kinematics::kinematics<4> &kin, const double dt, double stress[]);
 
   };
 
@@ -43,7 +43,7 @@ namespace sim {
     FemoralVE(double pars[], double fiber[], double visco[], double Tf);
     FemoralVE(double pars[], double fiber[], double visco[], double Tf, double Cmax[]);
     ~FemoralVE();
-    void stress(const kinematics::kinematics2D &kin, const double dt, double stress[]);
+    void stress(const kinematics::kinematics<4> &kin, const double dt, double stress[]);
 
   };
 

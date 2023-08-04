@@ -60,7 +60,7 @@ namespace constitutive_models {
   }
 
   // Stress functions
-  double Hog2D::stress(const kinematics::kinematics2D &kin, double stress[4]){
+  double Hog2D::stress(const kinematics::kinematics<4> &kin, double stress[4]){
 
     double I_4 = ddot<4>(m, kin.C) - 1;
     double dWd4 = k1*I_4*exp(k2* (I_4 * I_4 - E2));
