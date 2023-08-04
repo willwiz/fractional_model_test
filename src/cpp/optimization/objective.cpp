@@ -31,7 +31,7 @@ namespace residuals {
     double deltaCG[], double hysteresis[], double alphas[],
     int index[], int select[], int n, int dim, int nprot, int skip)
   {
-    return calc_residual_general<PlanarElastinMatrix, residual_body>(pars, fiber, visco, Tf, Cmax, \
+    return calc_residual_general<simulate<PlanarElastinMatrix>, residual_body>(pars, fiber, visco, Tf, Cmax, \
       args, stress, dt, weights, deltaCG, hysteresis, alphas, index, select, n, dim, \
       nprot, skip);
   }
@@ -43,7 +43,7 @@ namespace residuals {
     double deltaCG[], double hysteresis[], double alphas[],
     int index[], int select[], int n, int dim, int nprot, int skip)
   {
-    return calc_residual_general<ThoracicDefaultVEScaled, residual_body>(
+    return calc_residual_general<simulate<ThoracicDefaultVEScaled>, residual_body>(
       pars, fiber, visco, Tf, Cmax, \
       args, stress, dt, weights, deltaCG, hysteresis, alphas, index, select, n, dim, \
       nprot, skip);
@@ -70,7 +70,7 @@ namespace residuals {
     double deltaCG[], double hysteresis[], double alphas[],
     int index[], int select[], int n, int dim, int nprot, int skip)
   {
-    return calc_residual<Femoral>(pars, fiber, visco, Tf, Cmax, \
+    return calc_residual_general<simulate<Femoral>, residual_body>(pars, fiber, visco, Tf, Cmax, \
       args, stress, dt, weights, deltaCG, hysteresis, alphas, index, select, n, dim, \
       nprot, skip);
   }
@@ -81,7 +81,7 @@ namespace residuals {
     double deltaCG[], double hysteresis[], double alphas[],
     int index[], int select[], int n, int dim, int nprot, int skip)
   {
-    return calc_residual<FemoralVE>(pars, fiber, visco, Tf, Cmax, \
+    return calc_residual_general<simulate<FemoralVE>, residual_body>(pars, fiber, visco, Tf, Cmax, \
       args, stress, dt, weights, deltaCG, hysteresis, alphas, index, select, n, dim, \
       nprot, skip);
   }

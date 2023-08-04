@@ -37,7 +37,7 @@ namespace sim {
   void femoral_get_model_parameters_scaled(double pars[], double fiber[], double visco[], double Tf,
     double Cmax[], double pars_out[11])
   {
-    Femoral psi(pars, fiber, Cmax);
+    Femoral psi(pars, fiber);
     psi.get_scaled_pars(&pars_out[0]);
     pars_out[7]  = fiber[0];
     pars_out[8]  = fiber[1];
@@ -90,6 +90,13 @@ namespace sim {
     double Tf, double Cmax[], double args[], double dt[], double stress[], int n)
   {
     residuals::simulate<FemoralVE>(pars, fiber, caputo, Tf, Cmax, args, dt, stress, n);
+  }
+
+
+  void myocardium_vs_simulation(double pars[], double fiber[], double caputo[],
+    double Tf, double Cmax[], double args[], double dt[], double stress[], int n)
+  {
+    residuals::simulate3D<MyocardiumVE>(pars, fiber, caputo, Tf, Cmax, args, dt, stress, n);
   }
 
 }

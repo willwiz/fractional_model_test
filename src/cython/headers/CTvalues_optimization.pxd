@@ -18,6 +18,6 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/CTvalues_optimization.hpp" namespace "ctv":
+cdef extern from "src/cpp/CTvalues_optimization.hpp" namespace "ctv":
 
   pass

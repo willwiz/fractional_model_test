@@ -24,7 +24,7 @@ namespace sim {
 
   public:
     Femoral(double pars[], double fiber[]);
-    Femoral(double pars[], double fiber[], double Cmax[]);
+    Femoral(double pars[], double fiber[], double visco[], double Tf, double Cmax[]);
     ~Femoral();
 
     void get_scaled_pars(double pars[]);

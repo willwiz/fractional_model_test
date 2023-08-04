@@ -16,25 +16,51 @@ namespace residuals {
  |  Dependencies: None
  ----------------------------------------------------------------------------- */
 
-  template<class matlaw, int dim>
+
+  template<class matlaw>
   void simulate(double pars[], double fiber[], double caputo[],
     double Tf, double Cmax[], double args[], double dt[], double stress[], int n)
   {
     int strd_i;
 
-    double vals[dim];
+    double vals[4];
 
     kinematics::deformation2D kin;
     matlaw law(pars, fiber, caputo, Tf, Cmax);
 
     for (int i = 1; i < n; i++)
     {
-      strd_i = dim * i;
+      strd_i = 4 * i;
       // Calculate deformation
       kin.precompute(&args[strd_i]);
       // Compute Final Stress
       law.stress(kin, dt[i], vals);
-      for (int j = 0; j < dim; j++)
+      for (int j = 0; j < 4; j++)
+      {
+        stress[strd_i + j] = vals[j];
+      }
+    }
+  }
+
+  template<class matlaw>
+  void simulate3D(double pars[], double fiber[], double caputo[],
+    double Tf, double Cmax[], double args[], double dt[], double stress[], int n)
+  {
+    int strd_i;
+
+    double vals[9];
+
+    kinematics::deformation3D kin;
+    matlaw law(pars, fiber, caputo, Tf, Cmax);
+
+    for (int i = 1; i < n; i++)
+    {
+      strd_i = 9 * i;
+      // Calculate deformation
+      kin.precompute(&args[strd_i]);
+      // Compute Final Stress
+      law.stress(kin, dt[i], vals);
+      for (int j = 0; j < 9; j++)
       {
         stress[strd_i + j] = vals[j];
       }
@@ -42,7 +68,7 @@ namespace residuals {
   }
 
 
-  template<class matlaw, ResidualCalculation resfunc>
+  template<SimulateFunction simfunc, ResidualCalculation resfunc>
   double calc_residual_general(
     double pars[], double fiber[], double visco[], double Tf, double Cmax[],
     double args[], double stress[], double dt[], double weights[],
@@ -51,7 +77,7 @@ namespace residuals {
   {
     double * sims = new double[n*dim]();
 
-    simulate<matlaw>(pars, fiber, visco, Tf, Cmax, args, dt, &sims[0], n);
+    simfunc(pars, fiber, visco, Tf, Cmax, args, dt, &sims[0], n);
 
     double res = resfunc(args, stress, weights, index, select, dim, nprot, skip, sims);
 
@@ -81,7 +107,7 @@ namespace residuals {
   {
 
     int strd_i, strd_k;
-    double ds, res, eps;
+    double res, eps;
     int kid, start, stop;
 
     res = 0;

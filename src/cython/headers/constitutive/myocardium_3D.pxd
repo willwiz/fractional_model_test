@@ -1,4 +1,4 @@
-# File: planar_hog.pxd
+# File: myocardium_3D.pxd
 # distutils: language = c++
 # cython: language_level=3
 
@@ -11,7 +11,7 @@ cimport src.cython.headers.kinematics.tensor_algebra
 cimport src.cython.headers.kinematics.kinematics
 cimport src.cython.headers.constitutive.interfaces
 
-cdef extern from "src/cpp/constitutive/planar_hog.cpp":
+cdef extern from "src/cpp/constitutive/myocardium_3D.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -23,18 +23,18 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "src/cpp/constitutive/planar_hog.hpp" namespace "constitutive_models":
-  cdef cppclass PlanarHog2D:
-    double k1
-    double k2
-    double m[4]
-    double E1
-    double E2
-    PlanarHog2D() except +
-    PlanarHog2D(double k1, double k2, double theta, double kappa) except +
-    PlanarHog2D(double k1, double k2, double theta, double kappa, double[] Cmax) except +
-    void set_pars(double theta, double kappa)
-    void set_pars(double theta, double kappa, double[] Cmax)
-    double get_scaled_modulus()
+cdef extern from "src/cpp/constitutive/myocardium_3D.hpp" namespace "constitutive_models":
+  cdef cppclass Myocardium:
+    double mxm[9]
+    double nxn[9]
+    double zxz[9]
+    double mxn[9]
+    double mxz[9]
+    double nxz[9]
+    Myocardium() except +
+    Myocardium(double b1, double b2, double kff, double kss, double knn,
+      double kfs, double kfn, double ksn, double[] fiber) except +
+    void set_pars(double b1, double b2, double kff, double kss, double knn,
+      double kfs, double kfn, double ksn, double[] fiber)
     void stress(double[] args, double[] stress)
 

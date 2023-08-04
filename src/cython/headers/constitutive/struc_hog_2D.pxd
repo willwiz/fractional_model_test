@@ -7,11 +7,11 @@
 C++ Source Files
 ---------------------------------------------------------------------------- """
 
-cimport cython.headers.kinematics.kinematics
-cimport cython.headers.kinematics.tensor_algebra
-cimport cython.headers.constitutive.interfaces
+cimport src.cython.headers.kinematics.tensor_algebra
+cimport src.cython.headers.kinematics.kinematics
+cimport src.cython.headers.constitutive.interfaces
 
-cdef extern from "cpp/constitutive/struc_hog_2D.cpp":
+cdef extern from "src/cpp/constitutive/struc_hog_2D.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -23,7 +23,7 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/constitutive/struc_hog_2D.hpp" namespace "constitutive_models":
+cdef extern from "src/cpp/constitutive/struc_hog_2D.hpp" namespace "constitutive_models":
   cdef cppclass StrucHOG2D:
     double k1
     double k2

@@ -8,7 +8,7 @@ C++ Source Files
 ---------------------------------------------------------------------------- """
 
 
-cdef extern from "cpp/fractional/caputo.cpp":
+cdef extern from "src/cpp/fractional/caputo.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/fractional/caputo.hpp" namespace "caputo":
+cdef extern from "src/cpp/fractional/caputo.hpp" namespace "caputo":
   cdef cppclass caputo_init:
     double alpha
     double Tf

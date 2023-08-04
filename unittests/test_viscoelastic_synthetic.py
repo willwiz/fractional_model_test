@@ -10,7 +10,7 @@ from numpy.testing import assert_almost_equal
 from scipy.interpolate import interp1d
 from artery.matlaws.hog20132D import *
 from artery.matlaws.caputoD import *
-from artery.matlaws.artery_models import (Femoral_VESimulation)
+from artery.matlaws.artery import (Femoral_VESimulation)
 import matplotlib.pyplot as plt
 from time import perf_counter
 import unittest

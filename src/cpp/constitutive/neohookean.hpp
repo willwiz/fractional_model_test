@@ -18,4 +18,18 @@ namespace constitutive_models {
       void stress(double args[], double stress[]);
   };
 
+
+  class NeoHookean3D: public MatLawInterface<9>
+  {
+    public:
+      double mu;
+
+      NeoHookean3D () {};
+      NeoHookean3D (double mu);
+      ~NeoHookean3D () {};
+      void set_pars(double mu);
+      double stress(const kinematics::kinematics<9> &kin, double stress[]);
+      void stress(double args[], double stress[]);
+  };
+
 }

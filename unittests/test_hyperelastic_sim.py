@@ -5,7 +5,7 @@ from numpy import zeros, array
 from numpy.testing import assert_almost_equal
 from artery.matlaws.hog20132D import *
 from artery.matlaws.caputoD import *
-from artery.matlaws.artery_models import (
+from artery.matlaws.artery import (
   NeoHookean2D,
   HOGstruc2D,
   pyHOG2D,

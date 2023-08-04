@@ -10,17 +10,16 @@ import numpy as np
 cimport numpy as np
 cimport cython
 
-cimport src.cython.headers.constitutive.caputo
+cimport src.cython.headers.fractional.caputo
 from src.cython.headers.constitutive.neohookean cimport NeoHookean
 from src.cython.headers.constitutive.hog_2D cimport Hog2D
-from src.cython.headers.constitutive.hog_double_2D cimport HOGDouble2D
 from src.cython.headers.constitutive.struc_hog_2D cimport StrucHOG2D
-from src.cython.headers.hmodels.simulation cimport (
+from src.cython.headers.optimization.simulation cimport (
   femoral_he_simulate,
   femoral_ve_simulate,
   thoracic_default_ve_simulate_scaled,
 )
-from src.cython.headers.hmodels.objective cimport (
+from src.cython.headers.optimization.objective cimport (
   femoral_residual_HE,
   femoral_residual_VE,
   thoracic_default_residual_VE_scaled_hyst_relax,

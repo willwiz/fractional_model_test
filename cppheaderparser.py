@@ -107,8 +107,8 @@ def main(file:str = "src/cpp/constitutive/hog_double_2D.hpp", show_content:bool 
     # file = "src/cpp/constitutive/neohookean.hpp"
     # file = "src/cpp/constitutive/hog_2D.hpp"
     file = "/".join(file.split(os.sep))
-    cpphome = 'cpp'
-    cythonhome = 'cython/headers'
+    cpphome = 'src/cpp'
+    cythonhome = 'src/cython/headers'
     folder, name = os.path.split(file)
     handle, _ = os.path.splitext(name)
     folder = folder.replace(cpphome, cythonhome)
@@ -241,7 +241,11 @@ def get_content(input:str) -> Tuple[bool, CPPElement, str]:
             idx  = data.find('{')
             id   = find_context_end(data, idx)
             elem = None
+        elif res.startswith('inline'):
+            id   = data.find(';')
+            elem = None
         else:
+            print(data)
             raise ValueError('Attempting to resolve template failed')
     elif data.startswith('typedef'):
         id   = data.find(';')
@@ -413,11 +417,11 @@ if __name__=="__main__":
         # for fin in files:
         #     print(f"Working on {fin}")
         #     main(fin)
-        files = glob('cpp/*/*.hpp')
+        files = glob('src/cpp/*/*.hpp')
         for fin in files:
             print(f"Working on {fin}")
             main(fin)
-        files = glob('cpp/*.hpp')
+        files = glob('src/cpp/*.hpp')
         for fin in files:
             print(f"Working on {fin}")
             main(fin)

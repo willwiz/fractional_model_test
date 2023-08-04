@@ -28,11 +28,11 @@ namespace sim {
             m_elastin(pars[3], pars[4], fiber[0]),
             m_muscle(pars[5], pars[6], fiber[0] + M_PI_2)
     {}
-    Femoral::Femoral(double pars[], double fiber[], double Cmax[])
+    Femoral::Femoral(double pars[], double fiber[], double visco[], double Tf, double Cmax[])
         :   m_matrix(pars[0]),
-            m_collagen(pars[1], pars[2], fiber[0], fiber[1], -fiber[1], ctv::M_kip, ctv::M_kop, Cmax),
-            m_elastin(pars[3], pars[4], fiber[0], Cmax),
-            m_muscle(pars[5], pars[6], fiber[0] + M_PI_2, Cmax)
+            m_collagen(pars[1], pars[2], fiber[0], fiber[1], -fiber[1], ctv::M_kip, ctv::M_kop),
+            m_elastin(pars[3], pars[4], fiber[0]),
+            m_muscle(pars[5], pars[6], fiber[0] + M_PI_2)
     {}
 
     Femoral::~Femoral() {}
@@ -75,7 +75,7 @@ namespace sim {
     {}
 
     FemoralVE::FemoralVE(double pars[], double fiber[], double visco[], double Tf, double Cmax[]):
-        Femoral(pars, fiber, Cmax),
+        Femoral(pars, fiber),
         collagen(m_collagen, visco[0], Tf),
         muscle(m_muscle, visco[1], Tf)
     {}

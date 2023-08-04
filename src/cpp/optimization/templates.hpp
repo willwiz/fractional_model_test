@@ -4,6 +4,7 @@
 
 namespace residuals {
 
+  typedef void (*SimulateFunction) (double*, double*, double*, double, double*, double*, double*, double *, int);
   typedef double (*ResidualCalculation) (double*, double*, double*, int*, int*, int, int, int, double*);
 
 
@@ -11,8 +12,11 @@ namespace residuals {
   void simulate(double pars[], double fiber[], double caputo[],
     double Tf, double Cmax[], double args[], double dt[], double stress[], int n);
 
+  template<class matlaw>
+  void simulate3D(double pars[], double fiber[], double caputo[],
+    double Tf, double Cmax[], double args[], double dt[], double stress[], int n);
 
-  template<class matlaw, ResidualCalculation resfunc>
+  template<SimulateFunction, ResidualCalculation resfunc>
   double calc_residual_general(
     double pars[], double fiber[], double visco[], double Tf, double Cmax[],
     double args[], double stress[], double dt[], double weights[],
@@ -26,12 +30,4 @@ namespace residuals {
 
 
   // Residual templates
-
-  template<class matlaw>
-  double calc_residual(double pars[], double fiber[],
-    double visco[], double Tf, double Cmax[],
-    double args[], double stress[], double dt[], double weights[],
-    double deltaCG[], double hysteresis[], double alphas[],
-    int index[], int select[], int n, int dim, int nprot, int skip);
-
 }

@@ -1,4 +1,4 @@
-# File: fractional.pxd
+# File: myocardium_ve_model.pxd
 # distutils: language = c++
 # cython: language_level=3
 
@@ -7,11 +7,12 @@
 C++ Source Files
 ---------------------------------------------------------------------------- """
 
-cimport src.cython.headers.kinematics.kinematics
+cimport src.cython.headers.constitutive.myocardium_3D
+cimport src.cython.headers.fractional.fractional
+cimport src.cython.headers.constitutive.neohookean
 cimport src.cython.headers.constitutive.interfaces
-cimport src.cython.headers.fractional.caputo
 
-cdef extern from "src/cpp/fractional/fractional.cpp":
+cdef extern from "src/cpp/tissue_models/myocardium_ve_model.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -23,6 +24,11 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "src/cpp/fractional/fractional.hpp" namespace "constitutive_models":
+cdef extern from "src/cpp/tissue_models/myocardium_ve_model.hpp" namespace "sim":
+  cdef cppclass MyocardiumHE:
+    MyocardiumHE(double[] pars, double[] fiber) except +
 
-  pass
+  cdef cppclass MyocardiumVE:
+    MyocardiumVE(double[] pars, double[] fiber, double[] visco, double Tf,
+      double[] Cmax) except +
+

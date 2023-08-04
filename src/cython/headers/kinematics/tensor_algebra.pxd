@@ -8,7 +8,7 @@ C++ Source Files
 ---------------------------------------------------------------------------- """
 
 
-cdef extern from "cpp/kinematics/tensor_algebra.cpp":
+cdef extern from "src/cpp/kinematics/tensor_algebra.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -20,6 +20,6 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/kinematics/tensor_algebra.hpp" namespace "constitutive_models":
+cdef extern from "src/cpp/kinematics/tensor_algebra.hpp" namespace "constitutive_models":
   cdef void addto(double[] a, double[] b, int dim)
 

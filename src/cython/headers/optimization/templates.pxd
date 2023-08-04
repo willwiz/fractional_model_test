@@ -7,10 +7,10 @@
 C++ Source Files
 ---------------------------------------------------------------------------- """
 
-cimport cython.headers.constitutive.interfaces
-cimport cython.headers.CTvalues_optimization
+cimport src.cython.headers.CTvalues_optimization
+cimport src.cython.headers.constitutive.interfaces
 
-cdef extern from "cpp/optimization/templates.cpp":
+cdef extern from "src/cpp/optimization/templates.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -22,7 +22,7 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/optimization/templates.hpp" namespace "residuals":
+cdef extern from "src/cpp/optimization/templates.hpp" namespace "residuals":
   cdef double residual_body(double[] strain, double[] stress, double[] weights,
     int[] index, int[] select, int dim, int nprot, int skip, double[] sims)
 

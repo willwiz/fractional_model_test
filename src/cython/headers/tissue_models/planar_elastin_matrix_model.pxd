@@ -7,12 +7,12 @@
 C++ Source Files
 ---------------------------------------------------------------------------- """
 
-cimport cython.headers.constitutive.neohookean
-cimport cython.headers.constitutive.planar_hog
-cimport cython.headers.constitutive.interfaces
-cimport cython.headers.CTvalues_optimization
+cimport src.cython.headers.constitutive.planar_hog
+cimport src.cython.headers.CTvalues_optimization
+cimport src.cython.headers.constitutive.neohookean
+cimport src.cython.headers.constitutive.interfaces
 
-cdef extern from "cpp/tissue_models/planar_elastin_matrix_model.cpp":
+cdef extern from "src/cpp/tissue_models/planar_elastin_matrix_model.cpp":
   pass
 
 """ ----------------------------------------------------------------------------
@@ -24,7 +24,7 @@ End of Source Files
 # C++ Header files + exported definitions
 # ------------------------------------------------------------------------------
 
-cdef extern from "cpp/tissue_models/planar_elastin_matrix_model.hpp" namespace "sim":
+cdef extern from "src/cpp/tissue_models/planar_elastin_matrix_model.hpp" namespace "sim":
   cdef cppclass PlanarElastinMatrix:
     PlanarElastinMatrix(double[] pars, double[] fiber, double[] visco, double Tf,
       double[] Cmax) except +
